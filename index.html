@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AURA AI — Intelligent AI Assistant by Daniyal Hasan</title>
+  <meta name="description" content="Download AURA AI — the free, powerful AI assistant for chat, image analysis, art generation and voice input. Built by Daniyal Hasan. No account needed."/>
+  <meta name="keywords" content="AURA AI, free AI assistant, AI chat, image generation, Daniyal Hasan, AI app, download"/>
+  <meta property="og:title" content="AURA AI — Your Free Intelligent AI Assistant"/>
+  <meta property="og:description" content="Chat, analyze images, generate art, use voice. Free forever. By Daniyal Hasan."/>
+  <meta property="og:type" content="website"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root{
+      --void:#03040a;--deep:#070b14;
+      --accent:#00d4ff;--accent2:#7b6ff0;--accent3:#ff6eb4;
+      --grad:linear-gradient(135deg,var(--accent),var(--accent2));
+      --grad3:linear-gradient(135deg,var(--accent),var(--accent2),var(--accent3));
+      --glass:rgba(255,255,255,0.04);--border:rgba(255,255,255,0.08);
+      --t1:rgba(230,240,255,0.92);--t2:rgba(160,180,220,0.65);--t3:rgba(100,130,180,0.45);
+      --fd:'Syne',sans-serif;--fb:'DM Sans',sans-serif;--fm:'JetBrains Mono',monospace;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;overflow-x:hidden}
+    body{font-family:var(--fb);background:var(--void);color:var(--t1);overflow-x:hidden;-webkit-font-smoothing:antialiased;max-width:100vw}
+
+    /* NOISE */
+    body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5}
+
+    /* ORBS */
+    .orbs{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+    .orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.18;animation:float linear infinite}
+    .o1{width:700px;height:700px;background:radial-gradient(circle,rgba(0,212,255,0.5),transparent 70%);top:-250px;left:-150px;animation-duration:32s}
+    .o2{width:600px;height:600px;background:radial-gradient(circle,rgba(123,111,240,0.4),transparent 70%);bottom:-200px;right:-150px;animation-duration:40s;animation-delay:-18s}
+    .o3{width:350px;height:350px;background:radial-gradient(circle,rgba(255,110,180,0.25),transparent 70%);top:40%;left:50%;animation-duration:26s;animation-delay:-9s}
+    @keyframes float{0%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-25px) scale(1.06)}66%{transform:translate(-25px,40px) scale(.94)}100%{transform:translate(0,0) scale(1)}}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 60px;display:flex;align-items:center;justify-content:space-between;transition:all .4s}
+    nav.scrolled{background:rgba(3,4,10,0.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+    .nav-logo{display:flex;align-items:center;gap:11px;text-decoration:none}
+    .nav-mark{width:36px;height:36px;border-radius:11px;position:relative;overflow:hidden;flex-shrink:0}
+    .nav-mark::before{content:'';position:absolute;inset:-2px;background:conic-gradient(from 0deg,var(--accent),var(--accent2),var(--accent3),var(--accent));border-radius:inherit;animation:spin 4s linear infinite;opacity:.8}
+    .nav-mark::after{content:'';position:absolute;inset:3px;background:#0a0f1e;border-radius:8px}
+    .nav-mark svg{position:absolute;z-index:1;top:50%;left:50%;transform:translate(-50%,-50%)}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .nav-name{font-family:var(--fd);font-size:18px;font-weight:800;letter-spacing:.06em;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .nav-links{display:flex;align-items:center;gap:32px}
+    .nav-links a{color:var(--t2);text-decoration:none;font-size:14px;font-weight:500;transition:color .2s}
+    .nav-links a:hover{color:var(--accent)}
+    .nav-dl{padding:10px 22px;border-radius:100px;background:var(--grad);color:#03040a;font-size:13px;font-weight:700;text-decoration:none;font-family:var(--fd);letter-spacing:.04em;transition:all .25s;box-shadow:0 4px 20px rgba(0,212,255,.3)}
+    .nav-dl:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,212,255,.5)}
+
+    /* HERO */
+    .hero{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 24px 80px}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:100px;background:rgba(0,212,255,0.07);border:1px solid rgba(0,212,255,0.2);font-size:11px;font-weight:600;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:28px;animation:fadeUp .6s ease both}
+    .badge-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);animation:pulse 2s ease infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+    .hero-title{font-family:var(--fd);font-size:clamp(48px,8vw,96px);font-weight:800;line-height:.92;letter-spacing:-.03em;margin-bottom:24px;animation:fadeUp .6s .1s ease both}
+    .hero-title .grad{background:var(--grad3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block}
+    .hero-subtitle{font-family:var(--fb);font-size:clamp(16px,2.5vw,22px);color:var(--t2);font-weight:300;margin-bottom:8px;animation:fadeUp .6s .15s ease both;letter-spacing:.01em}
+    .hero-desc{font-size:clamp(14px,1.8vw,17px);color:var(--t3);line-height:1.7;max-width:560px;margin:0 auto 40px;animation:fadeUp .6s .2s ease both}
+    .hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:56px;animation:fadeUp .6s .3s ease both}
+    .btn-primary{display:flex;align-items:center;gap:10px;padding:16px 36px;border-radius:16px;background:var(--grad);color:#03040a;font-family:var(--fd);font-size:16px;font-weight:700;text-decoration:none;transition:all .25s;box-shadow:0 8px 32px rgba(0,212,255,.35);letter-spacing:.03em}
+    .btn-primary:hover{transform:translateY(-3px);box-shadow:0 16px 48px rgba(0,212,255,.5)}
+    .btn-outline{display:flex;align-items:center;gap:10px;padding:16px 32px;border-radius:16px;background:var(--glass);border:1px solid var(--border);color:var(--t1);font-family:var(--fd);font-size:15px;font-weight:600;text-decoration:none;transition:all .25s;backdrop-filter:blur(12px)}
+    .btn-outline:hover{border-color:rgba(0,212,255,.3);transform:translateY(-3px)}
+    .hero-stats{display:flex;gap:48px;justify-content:center;flex-wrap:wrap;animation:fadeUp .6s .4s ease both}
+    .stat{text-align:center}
+    .stat-n{font-family:var(--fd);font-size:28px;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .stat-l{font-size:11px;color:var(--t3);letter-spacing:.08em;text-transform:uppercase;margin-top:4px}
+    .stat-div{width:1px;height:40px;background:var(--border);align-self:center}
+
+    /* 3D CANVAS */
+    .canvas-wrap{position:relative;width:100%;max-width:600px;height:420px;margin:0 auto 0;animation:fadeUp .8s .2s ease both}
+    #heroCanvas{width:100%;height:100%}
+    .float-tag{position:absolute;background:rgba(8,14,32,.9);backdrop-filter:blur(16px);border-radius:14px;padding:10px 16px;font-size:12px;color:var(--t2);white-space:nowrap;border:1px solid rgba(255,255,255,.07)}
+    .ft1{top:15%;left:2%;border-color:rgba(0,212,255,.2);animation:floatY 4s ease-in-out infinite}
+    .ft2{top:15%;right:2%;border-color:rgba(123,111,240,.2);animation:floatY 4s .8s ease-in-out infinite}
+    .ft3{bottom:15%;left:2%;border-color:rgba(255,110,180,.2);animation:floatY 4s 1.6s ease-in-out infinite}
+    .ft4{bottom:15%;right:2%;border-color:rgba(0,212,255,.2);animation:floatY 4s 2.4s ease-in-out infinite}
+    @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+
+    /* TRUSTED BY */
+    .trust-bar{position:relative;z-index:1;padding:32px 24px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:rgba(255,255,255,.015)}
+    .trust-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap}
+    .trust-stat{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--t2)}
+    .trust-icon{font-size:20px}
+    .trust-val{font-family:var(--fd);font-size:18px;font-weight:700;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+    /* SECTIONS */
+    .section{position:relative;z-index:1;padding:100px 24px;max-width:1200px;margin:0 auto;text-align:center}
+    .sec-tag{font-family:var(--fm);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+    .sec-title{font-family:var(--fd);font-size:clamp(32px,4.5vw,52px);font-weight:800;line-height:1.08;margin-bottom:16px}
+    .sec-title em{font-style:normal;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .sec-sub{font-size:17px;color:var(--t2);max-width:520px;line-height:1.7;margin:0 auto 60px}
+
+    /* FEATURES */
+    .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;text-align:left}
+    .feat{padding:30px;border-radius:22px;background:var(--glass);border:1px solid var(--border);transition:all .3s;position:relative;overflow:hidden}
+    .feat::before{content:'';position:absolute;inset:0;background:var(--grad);opacity:0;transition:opacity .3s}
+    .feat:hover{border-color:rgba(0,212,255,.25);transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,.3)}
+    .feat:hover::before{opacity:.04}
+    .feat-icon{font-size:28px;margin-bottom:16px;display:block}
+    .feat-title{font-family:var(--fd);font-size:17px;font-weight:700;margin-bottom:9px}
+    .feat-desc{font-size:13.5px;color:var(--t2);line-height:1.65}
+
+    /* DEMO SCREENSHOTS */
+    .demo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}
+    .demo-card{border-radius:20px;background:linear-gradient(160deg,rgba(12,18,40,.95),rgba(6,9,20,.98));border:1px solid var(--border);overflow:hidden;transition:all .3s}
+    .demo-card:hover{transform:translateY(-4px);border-color:rgba(0,212,255,.2);box-shadow:0 20px 50px rgba(0,0,0,.4)}
+    .demo-header{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+    .demo-dots{display:flex;gap:5px}
+    .dd{width:8px;height:8px;border-radius:50%}
+    .demo-title-bar{font-size:11px;color:var(--t3);font-family:var(--fm);margin-left:4px}
+    .demo-body{padding:16px;min-height:160px;display:flex;flex-direction:column;gap:10px}
+    .demo-msg{padding:9px 12px;border-radius:10px;font-size:11.5px;line-height:1.5}
+    .dm-ai{background:rgba(0,212,255,.06);border:1px solid rgba(0,212,255,.1);color:var(--t2);align-self:flex-start;max-width:85%}
+    .dm-user{background:rgba(123,111,240,.1);border:1px solid rgba(123,111,240,.15);color:var(--t1);align-self:flex-end;max-width:85%}
+    .demo-img-placeholder{border-radius:10px;background:linear-gradient(135deg,rgba(0,212,255,.08),rgba(123,111,240,.08));border:1px solid rgba(0,212,255,.1);height:100px;display:flex;align-items:center;justify-content:center;font-size:28px}
+
+    /* HOW IT WORKS */
+    .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;margin-top:64px}
+    .steps::before{content:'';position:absolute;top:34px;left:12%;right:12%;height:1px;background:linear-gradient(90deg,transparent,rgba(0,212,255,.3),rgba(123,111,240,.3),transparent)}
+    .step{text-align:center;padding:0 12px}
+    .step-n{width:68px;height:68px;border-radius:20px;background:var(--grad);display:flex;align-items:center;justify-content:center;margin:0 auto 22px;font-family:var(--fd);font-size:22px;font-weight:800;color:#03040a;box-shadow:0 8px 28px rgba(0,212,255,.3);position:relative;z-index:1}
+    .step-title{font-family:var(--fd);font-size:16px;font-weight:700;margin-bottom:8px}
+    .step-desc{font-size:13px;color:var(--t2);line-height:1.6}
+
+    /* REQUIREMENTS */
+    .req-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;text-align:left;margin-top:16px}
+    .req-card{padding:24px 28px;border-radius:18px;background:var(--glass);border:1px solid var(--border)}
+    .req-title{font-family:var(--fd);font-size:14px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+    .req-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+    .req-list li{font-size:13px;color:var(--t2);display:flex;align-items:center;gap:8px}
+    .req-list li::before{content:'✓';color:var(--accent);font-weight:700;font-size:12px;flex-shrink:0}
+
+    /* TESTIMONIALS */
+    .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px;text-align:left}
+    .testi{padding:26px;border-radius:20px;background:var(--glass);border:1px solid var(--border);transition:all .3s}
+    .testi:hover{border-color:rgba(0,212,255,.2);transform:translateY(-3px)}
+    .testi-stars{color:#ffc107;font-size:14px;margin-bottom:12px;letter-spacing:2px}
+    .testi-text{font-size:14px;color:var(--t2);line-height:1.65;margin-bottom:16px;font-style:italic}
+    .testi-author{display:flex;align-items:center;gap:10px}
+    .testi-av{width:36px;height:36px;border-radius:10px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:14px;font-weight:700;color:#03040a;flex-shrink:0}
+    .testi-name{font-family:var(--fd);font-size:13px;font-weight:700}
+    .testi-role{font-size:11px;color:var(--t3);margin-top:2px}
+
+    /* SECURITY */
+    .sec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px;text-align:left}
+    .sec-card{padding:24px;border-radius:18px;background:var(--glass);border:1px solid rgba(0,255,120,.1);display:flex;align-items:flex-start;gap:14px}
+    .sec-icon{font-size:22px;flex-shrink:0;margin-top:2px}
+    .sec-card-title{font-family:var(--fd);font-size:14px;font-weight:700;margin-bottom:6px;color:rgba(0,255,160,.9)}
+    .sec-card-text{font-size:13px;color:var(--t2);line-height:1.6}
+
+    /* FAQ */
+    .faq-list{display:flex;flex-direction:column;gap:12px;margin-top:16px;text-align:left;max-width:760px;margin-left:auto;margin-right:auto}
+    .faq-item{border-radius:16px;background:var(--glass);border:1px solid var(--border);overflow:hidden}
+    .faq-q{padding:18px 22px;font-family:var(--fd);font-size:15px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:color .2s}
+    .faq-q:hover{color:var(--accent)}
+    .faq-q span{font-size:18px;transition:transform .3s;color:var(--t3)}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease;font-size:14px;color:var(--t2);line-height:1.7;padding:0 22px}
+    .faq-item.open .faq-a{max-height:200px;padding:0 22px 18px}
+    .faq-item.open .faq-q span{transform:rotate(45deg);color:var(--accent)}
+
+    /* DOWNLOAD */
+    .dl-wrap{position:relative;z-index:1;padding:0 24px 100px;max-width:900px;margin:0 auto}
+    .dl-card{border-radius:32px;padding:72px 60px;background:linear-gradient(135deg,rgba(0,212,255,.05),rgba(123,111,240,.05));border:1px solid rgba(0,212,255,.12);position:relative;overflow:hidden;text-align:center}
+    .dl-card::before{content:'';position:absolute;inset:-1px;border-radius:33px;background:conic-gradient(from 0deg,var(--accent),var(--accent2),var(--accent3),var(--accent));z-index:-1;animation:spin 10s linear infinite;opacity:.1}
+    .dl-card::after{content:'';position:absolute;inset:1px;border-radius:31px;background:linear-gradient(135deg,rgba(7,11,20,.98),rgba(3,4,10,.98));z-index:-1}
+    .dl-title{font-family:var(--fd);font-size:clamp(30px,4vw,48px);font-weight:800;margin-bottom:14px}
+    .dl-title em{font-style:normal;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .dl-sub{font-size:16px;color:var(--t2);margin-bottom:40px;line-height:1.65;max-width:480px;margin-left:auto;margin-right:auto}
+    .dl-btn{display:inline-flex;align-items:center;gap:14px;padding:20px 52px;border-radius:20px;background:var(--grad);color:#03040a;font-family:var(--fd);font-size:18px;font-weight:800;text-decoration:none;transition:all .3s;box-shadow:0 12px 40px rgba(0,212,255,.4);letter-spacing:.03em;margin-bottom:20px}
+    .dl-btn:hover{transform:translateY(-4px);box-shadow:0 22px 60px rgba(0,212,255,.55)}
+    .dl-btn svg{width:22px;height:22px}
+    .dl-note{font-size:12px;color:var(--t3);font-family:var(--fm);letter-spacing:.06em;margin-bottom:32px}
+    .dl-plats{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+    .dl-plat{padding:9px 18px;border-radius:10px;background:var(--glass);border:1px solid var(--border);font-size:12.5px;color:var(--t2);display:flex;align-items:center;gap:7px}
+
+    /* ABOUT */
+    .about-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;text-align:left}
+    .acards{display:flex;flex-direction:column;gap:14px}
+    .acard{padding:22px 26px;border-radius:18px;background:var(--glass);border:1px solid var(--border);transition:all .3s;display:flex;align-items:flex-start;gap:14px}
+    .acard:hover{border-color:rgba(0,212,255,.2);transform:translateX(6px)}
+    .acard-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:4px}
+    .acard-body .acard-title{font-family:var(--fd);font-size:14px;font-weight:700;margin-bottom:5px}
+    .acard-body .acard-text{font-size:13px;color:var(--t2);line-height:1.6}
+
+    /* FOOTER */
+    footer{position:relative;z-index:1;padding:40px 60px;border-top:1px solid var(--border)}
+    .footer-top{display:flex;align-items:flex-start;justify-content:space-between;gap:40px;margin-bottom:40px;flex-wrap:wrap}
+    .footer-brand .footer-name{font-family:var(--fd);font-size:20px;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
+    .footer-brand p{font-size:13px;color:var(--t3);max-width:220px;line-height:1.6}
+    .footer-cols{display:flex;gap:60px;flex-wrap:wrap}
+    .footer-col h4{font-family:var(--fd);font-size:13px;font-weight:700;color:var(--t1);margin-bottom:16px;letter-spacing:.04em}
+    .footer-col a{display:block;font-size:13px;color:var(--t3);text-decoration:none;margin-bottom:10px;transition:color .2s}
+    .footer-col a:hover{color:var(--accent)}
+    .footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:28px;border-top:1px solid var(--border);flex-wrap:wrap;gap:12px}
+    .footer-copy{font-size:12px;color:var(--t3)}
+    .footer-legal{display:flex;gap:20px}
+    .footer-legal a{font-size:12px;color:var(--t3);text-decoration:none;transition:color .2s}
+    .footer-legal a:hover{color:var(--accent)}
+
+    /* REVEAL */
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+    /* MOBILE */
+    @media(max-width:960px){
+      nav{padding:14px 20px}
+      .nav-links{display:none}
+      .canvas-wrap{height:300px}
+      .float-tag{display:none}
+      .hero{padding:100px 20px 60px}
+      .hero-stats{gap:24px}
+      .stat-div{display:none}
+      .feat-grid,.demo-grid,.testi-grid,.sec-grid,.req-grid{grid-template-columns:1fr}
+      .steps{grid-template-columns:1fr 1fr;gap:24px}
+      .steps::before{display:none}
+      .about-inner{grid-template-columns:1fr;gap:40px;text-align:center}
+      .acard:hover{transform:none}
+      .dl-card{padding:40px 20px}
+      .dl-btn{width:100%;max-width:340px;justify-content:center;font-size:16px}
+      footer{padding:32px 20px}
+      .footer-top{flex-direction:column;gap:32px}
+      .footer-bottom{flex-direction:column;text-align:center}
+      .footer-legal{justify-content:center}
+    }
+    @media(max-width:480px){
+      .hero-title{font-size:clamp(36px,11vw,52px)}
+      .steps{grid-template-columns:1fr}
+      .hero-btns{flex-direction:column;align-items:center}
+      .btn-primary,.btn-outline{width:100%;max-width:300px;justify-content:center}
+    }
+  </style>
+</head>
+<body>
+<div class="orbs"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">
+    <div class="nav-mark"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5Z"/></svg></div>
+    <span class="nav-name">AURA</span>
+  </a>
+  <div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#demo">Demo</a>
+    <a href="#about">About</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <a href="#download" class="nav-dl">Download Free</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge"><span class="badge-dot"></span>By Daniyal Hasan &nbsp;·&nbsp; v1.0 — Free Forever</div>
+  <div class="canvas-wrap">
+    <canvas id="heroCanvas"></canvas>
+    <div class="float-tag ft1"><span style="color:var(--accent);font-weight:700">⚡ Groq</span> — Instant AI</div>
+    <div class="float-tag ft2"><span style="color:var(--accent2);font-weight:700">👁 Vision</span> — Image AI</div>
+    <div class="float-tag ft3"><span style="color:var(--accent3);font-weight:700">🎨 Art</span> — Generate</div>
+    <div class="float-tag ft4"><span style="color:var(--accent);font-weight:700">🎤 Voice</span> — Speak</div>
+  </div>
+  <h1 class="hero-title"><span class="grad">AURA AI</span></h1>
+  <p class="hero-subtitle">Your Intelligent AI Assistant — Free Forever</p>
+  <p class="hero-desc">Chat, analyze images, generate art, and use voice input. Powered by Llama 3.3 on Groq. No account. No subscription. Just pure intelligence.</p>
+  <div class="hero-btns">
+    <a href="#download" class="btn-primary">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download AURA Free
+    </a>
+    <a href="#demo" class="btn-outline">See it in Action →</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-n">100%</div><div class="stat-l">Free</div></div>
+    <div class="stat-div"></div>
+    <div class="stat"><div class="stat-n">⚡ &lt;1s</div><div class="stat-l">Response time</div></div>
+    <div class="stat-div"></div>
+    <div class="stat"><div class="stat-n">6 AI</div><div class="stat-l">Capabilities</div></div>
+    <div class="stat-div"></div>
+    <div class="stat"><div class="stat-n">🔒</div><div class="stat-l">100% Private</div></div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-inner">
+    <div class="trust-stat"><span class="trust-icon">⭐</span><div><div class="trust-val">4.9/5</div><div style="font-size:11px;color:var(--t3)">User Rating</div></div></div>
+    <div class="trust-stat"><span class="trust-icon">🤖</span><div><div class="trust-val">Llama 3.3</div><div style="font-size:11px;color:var(--t3)">AI Model</div></div></div>
+    <div class="trust-stat"><span class="trust-icon">🔒</span><div><div class="trust-val">HTTPS</div><div style="font-size:11px;color:var(--t3)">Secure Hosting</div></div></div>
+    <div class="trust-stat"><span class="trust-icon">⚡</span><div><div class="trust-val">Groq LPU</div><div style="font-size:11px;color:var(--t3)">Fastest AI Chip</div></div></div>
+    <div class="trust-stat"><span class="trust-icon">🆓</span><div><div class="trust-val">No Limits</div><div style="font-size:11px;color:var(--t3)">Always Free</div></div></div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section class="section" id="features">
+  <div class="sec-tag reveal">Features</div>
+  <h2 class="sec-title reveal d1">Everything you need in <em>one AI</em></h2>
+  <p class="sec-sub reveal d2">Six powerful capabilities in one beautiful app. No subscriptions, no complexity.</p>
+  <div class="feat-grid">
+    <div class="feat reveal d1"><span class="feat-icon">🧠</span><div class="feat-title">Smart AI Chat</div><div class="feat-desc">Powered by Llama 3.3 on Groq's ultra-fast infrastructure. Ask anything and get intelligent, accurate answers in under a second.</div></div>
+    <div class="feat reveal d2"><span class="feat-icon">👁️</span><div class="feat-title">Image Analysis</div><div class="feat-desc">Upload any photo, screenshot, or document. AURA reads, analyzes, translates, and explains everything it sees with pinpoint accuracy.</div></div>
+    <div class="feat reveal d3"><span class="feat-icon">🎨</span><div class="feat-title">AI Art Generation</div><div class="feat-desc">Just type "draw a futuristic city" and watch stunning AI-generated images appear in seconds. No extra tools needed.</div></div>
+    <div class="feat reveal d1"><span class="feat-icon">🎤</span><div class="feat-title">Voice Input</div><div class="feat-desc">Tap the mic and speak your question. AURA transcribes it instantly using your device's speech engine.</div></div>
+    <div class="feat reveal d2"><span class="feat-icon">🔊</span><div class="feat-title">Natural Voice Replies</div><div class="feat-desc">Tap Listen on any response and hear it read aloud in a natural Google neural voice — like having a real conversation.</div></div>
+    <div class="feat reveal d3"><span class="feat-icon">💾</span><div class="feat-title">Cross-Session Memory</div><div class="feat-desc">AURA remembers your past conversations. Ask follow-up questions days later — it always knows the full context.</div></div>
+  </div>
+</section>
+
+<!-- DEMO -->
+<section class="section" id="demo">
+  <div class="sec-tag reveal">See it in action</div>
+  <h2 class="sec-title reveal d1"><em>Live Preview</em> — What AURA can do</h2>
+  <p class="sec-sub reveal d2">A glimpse of AURA's three core modes.</p>
+  <div class="demo-grid">
+    <div class="demo-card reveal d1">
+      <div class="demo-header"><div class="demo-dots"><div class="dd" style="background:#ff5f57"></div><div class="dd" style="background:#febc2e"></div><div class="dd" style="background:#28c840"></div></div><span class="demo-title-bar">AI Chat</span></div>
+      <div class="demo-body">
+        <div class="demo-msg dm-user">Explain quantum entanglement simply</div>
+        <div class="demo-msg dm-ai">When two particles are entangled, measuring one instantly affects the other — no matter how far apart they are. Einstein called it "spooky action at a distance." ✦</div>
+        <div class="demo-msg dm-user">Give me an example</div>
+        <div class="demo-msg dm-ai">Imagine two gloves separated globally. Open one box and see a left glove — you instantly know the other is a right glove.</div>
+      </div>
+    </div>
+    <div class="demo-card reveal d2">
+      <div class="demo-header"><div class="demo-dots"><div class="dd" style="background:#ff5f57"></div><div class="dd" style="background:#febc2e"></div><div class="dd" style="background:#28c840"></div></div><span class="demo-title-bar">Image Analysis</span></div>
+      <div class="demo-body">
+        <div class="demo-img-placeholder">🖼️</div>
+        <div class="demo-msg dm-user">What's in this image?</div>
+        <div class="demo-msg dm-ai">I can see detailed handwritten physics notes covering wave-particle duality and Schrödinger's equation. The equations appear to be from a university lecture. Want me to explain them?</div>
+      </div>
+    </div>
+    <div class="demo-card reveal d3">
+      <div class="demo-header"><div class="demo-dots"><div class="dd" style="background:#ff5f57"></div><div class="dd" style="background:#febc2e"></div><div class="dd" style="background:#28c840"></div></div><span class="demo-title-bar">Image Generation</span></div>
+      <div class="demo-body">
+        <div class="demo-msg dm-user">Draw a futuristic city at night</div>
+        <div class="demo-img-placeholder" style="height:120px;background:linear-gradient(135deg,rgba(0,212,255,.12),rgba(123,111,240,.12))">🌆 ✨ Generating…</div>
+        <div class="demo-msg dm-ai">Your image has been generated! Tap to view full size or save it. ✦</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section">
+  <div class="sec-tag reveal">How it works</div>
+  <h2 class="sec-title reveal d1">Up and running in <em>30 seconds</em></h2>
+  <div class="steps">
+    <div class="step reveal d1"><div class="step-n">1</div><div class="step-title">Download AURA</div><div class="step-desc">Get the free APK. No account, no credit card, no setup required at all.</div></div>
+    <div class="step reveal d2"><div class="step-n">2</div><div class="step-title">Install the App</div><div class="step-desc">Install on your Android device. Takes under 30 seconds from download to launch.</div></div>
+    <div class="step reveal d3"><div class="step-n">3</div><div class="step-title">Start Chatting</div><div class="step-desc">Ask anything, upload images, or speak. AURA responds in under a second.</div></div>
+    <div class="step reveal d4"><div class="step-n">4</div><div class="step-title">Explore More</div><div class="step-desc">Generate art, listen to replies, and let AURA remember your conversations.</div></div>
+  </div>
+</section>
+
+<!-- REQUIREMENTS -->
+<section class="section">
+  <div class="sec-tag reveal">System Requirements</div>
+  <h2 class="sec-title reveal d1">Works on <em>any device</em></h2>
+  <p class="sec-sub reveal d2">Lightweight and fast. AURA runs smoothly on most devices.</p>
+  <div class="req-grid">
+    <div class="req-card reveal d1">
+      <div class="req-title">📱 Android</div>
+      <ul class="req-list">
+        <li>Android 8.0 or higher</li>
+        <li>2GB RAM minimum</li>
+        <li>50MB storage space</li>
+        <li>Internet connection</li>
+        <li>Chrome browser (for HTML version)</li>
+      </ul>
+    </div>
+    <div class="req-card reveal d2">
+      <div class="req-title">🌐 All Platforms (HTML version)</div>
+      <ul class="req-list">
+        <li>Any modern browser (Chrome recommended)</li>
+        <li>Works on Windows, Mac, iOS, Android</li>
+        <li>No installation required</li>
+        <li>Internet connection for AI features</li>
+        <li>Microphone for voice input (optional)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section">
+  <div class="sec-tag reveal">Testimonials</div>
+  <h2 class="sec-title reveal d1">Loved by <em>users worldwide</em></h2>
+  <div class="testi-grid">
+    <div class="testi reveal d1">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"AURA is the best free AI assistant I've used. The image analysis is insanely accurate and the voice feature is smooth. Can't believe it's completely free."</div>
+      <div class="testi-author"><div class="testi-av">A</div><div><div class="testi-name">Ahmed K.</div><div class="testi-role">Student, Pakistan</div></div></div>
+    </div>
+    <div class="testi reveal d2">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"The typewriter effect on replies, the glassmorphism UI, the chat memory — this feels like a premium app. Daniyal built something special here."</div>
+      <div class="testi-author"><div class="testi-av">S</div><div><div class="testi-name">Sara M.</div><div class="testi-role">Developer, UAE</div></div></div>
+    </div>
+    <div class="testi reveal d3">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"I use AURA daily for coding help, document analysis and quick research. The fact that it remembers past conversations is a game changer."</div>
+      <div class="testi-author"><div class="testi-av">R</div><div><div class="testi-name">Raza H.</div><div class="testi-role">Engineer, India</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECURITY -->
+<section class="section">
+  <div class="sec-tag reveal">Security & Trust</div>
+  <h2 class="sec-title reveal d1">Your privacy is our <em>priority</em></h2>
+  <div class="sec-grid">
+    <div class="sec-card reveal d1"><span class="sec-icon">🔒</span><div><div class="sec-card-title">Local Storage Only</div><div class="sec-card-text">All your chat history is stored on your device only. Nothing is sent to our servers. Your conversations are 100% private.</div></div></div>
+    <div class="sec-card reveal d2"><span class="sec-icon">✅</span><div><div class="sec-card-title">Virus Scanned</div><div class="sec-card-text">Every release is scanned before publishing. The APK is clean, safe, and contains no malware or trackers.</div></div></div>
+    <div class="sec-card reveal d3"><span class="sec-icon">🌐</span><div><div class="sec-card-title">HTTPS Secured</div><div class="sec-card-text">Hosted on GitHub Pages with full HTTPS encryption. All API calls to Groq are secured with TLS.</div></div></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="sec-tag reveal">FAQ</div>
+  <h2 class="sec-title reveal d1">Common <em>Questions</em></h2>
+  <div class="faq-list reveal d1">
+    <div class="faq-item"><div class="faq-q">Is AURA really free forever? <span>+</span></div><div class="faq-a">Yes — completely free, no hidden fees, no subscriptions, no credit card ever required. AURA is and will always be free.</div></div>
+    <div class="faq-item"><div class="faq-q">Is my data safe? <span>+</span></div><div class="faq-a">Absolutely. All chat history is stored locally on your device. Nothing is shared, sold, or uploaded to any server. Your data belongs to you.</div></div>
+    <div class="faq-item"><div class="faq-q">What AI model powers AURA? <span>+</span></div><div class="faq-a">AURA uses Meta's Llama 3.3 70B model hosted on Groq's LPU infrastructure — one of the fastest and most capable free AI models available.</div></div>
+    <div class="faq-item"><div class="faq-q">Does it work without internet? <span>+</span></div><div class="faq-a">An internet connection is required for AI features (chat, image analysis) since responses come from Groq's API. The app itself launches offline.</div></div>
+    <div class="faq-item"><div class="faq-q">Who built AURA? <span>+</span></div><div class="faq-a">AURA was built by Daniyal Hasan — a self-taught developer and astrophysicist who believes AI should be accessible to everyone, for free.</div></div>
+    <div class="faq-item"><div class="faq-q">How do I report a bug? <span>+</span></div><div class="faq-a">Open a GitHub issue on the repository or email directly. Every bug report is taken seriously and fixed as quickly as possible.</div></div>
+  </div>
+</section>
+
+<!-- DOWNLOAD -->
+<div class="dl-wrap" id="download">
+  <div class="dl-card reveal">
+    <div class="sec-tag" style="display:inline-block;margin-bottom:16px">Download</div>
+    <h2 class="dl-title">Get <em>AURA AI</em> free</h2>
+    <p class="dl-sub">Download the APK, install it on your Android device, and start chatting with AI in under 30 seconds.</p>
+    <a href="https://drive.google.com/file/d/1-0m-AYAkrvezhzXQx2Ce6MacxsSQFzOe/view?usp=drivesdk" download="AURA-AI.apk" class="dl-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download AURA — Free
+    </a>
+    <div class="dl-note">✦ Free · No account · Android · v1.0 · Safe &amp; Scanned</div>
+    <div class="dl-plats">
+      <div class="dl-plat">🤖 Android APK</div>
+      <div class="dl-plat">🌐 Web (HTML version)</div>
+      <div class="dl-plat">🔒 HTTPS Secure</div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="section" id="about" style="padding-top:0">
+  <div class="about-inner">
+    <div>
+      <div class="sec-tag reveal">About</div>
+      <h2 class="sec-title reveal d1" style="text-align:left">Built by <em>Daniyal Hasan</em></h2>
+      <p style="font-size:16px;color:var(--t2);line-height:1.75;margin-bottom:18px" class="reveal d2">Daniyal Hasan is a self-taught developer, astrophysicist, and entrepreneur who builds beautiful digital products and explores the cosmos. AURA is his flagship AI project.</p>
+      <p style="font-size:14px;color:var(--t2);line-height:1.75;margin-bottom:28px" class="reveal d3">AURA was created to make AI truly accessible — no paywalls, no complexity, just pure intelligence in your pocket. Every animation, feature, and interaction was designed and built by hand with care.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap" class="reveal d4">
+        <a href="https://github.com/dhsdevelopers" target="_blank" style="display:flex;align-items:center;gap:8px;padding:10px 20px;border-radius:12px;background:var(--glass);border:1px solid var(--border);color:var(--t2);text-decoration:none;font-size:13px;transition:all .2s" onmouseover="this.style.borderColor='rgba(0,212,255,.3)'" onmouseout="this.style.borderColor='rgba(255,255,255,.08)'">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+    <div class="acards reveal d2">
+      <div class="acard"><div class="acard-dot" style="background:var(--accent)"></div><div class="acard-body"><div class="acard-title">Lightning Fast</div><div class="acard-text">Groq's LPU chip delivers responses 10x faster than traditional AI — no waiting, instant answers.</div></div></div>
+      <div class="acard"><div class="acard-dot" style="background:var(--accent2)"></div><div class="acard-body"><div class="acard-title">Always Free</div><div class="acard-text">No subscription tiers, no hidden fees. AURA is and will always be completely free for everyone.</div></div></div>
+      <div class="acard"><div class="acard-dot" style="background:var(--accent3)"></div><div class="acard-body"><div class="acard-title">Open & Transparent</div><div class="acard-text">Built with transparency in mind. Your data stays on your device. Nothing is ever sold or shared.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-name">AURA AI</div>
+      <p>Your free, intelligent AI assistant. Built by Daniyal Hasan.</p>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="#features">Features</a>
+        <a href="#demo">Demo</a>
+        <a href="#download">Download</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <h4>Developer</h4>
+        <a href="https://github.com/dhsdevelopers" target="_blank">GitHub</a>
+        <a href="mailto:contact@daniyal.dev">Contact</a>
+        <a href="#about">About Daniyal</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Open Source</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Daniyal Hasan — DHS Developers. All rights reserved.</div>
+    <div class="footer-legal">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="mailto:contact@daniyal.dev">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+  /* THREE.JS ORB */
+  const canvas=document.getElementById('heroCanvas');
+  const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  function resize(){renderer.setSize(canvas.offsetWidth,canvas.offsetHeight);camera.aspect=canvas.offsetWidth/canvas.offsetHeight;camera.updateProjectionMatrix();}
+  const scene=new THREE.Scene();
+  const camera=new THREE.PerspectiveCamera(45,1,0.1,100);
+  camera.position.z=3.2;
+  resize();
+
+  const geo=new THREE.IcosahedronGeometry(1,6);
+  const mat=new THREE.ShaderMaterial({
+    uniforms:{uTime:{value:0},uC1:{value:new THREE.Color(0x00d4ff)},uC2:{value:new THREE.Color(0x7b6ff0)},uC3:{value:new THREE.Color(0xff6eb4)}},
+    vertexShader:`uniform float uTime;varying vec3 vN,vP;void main(){vN=normal;vP=position;vec3 p=position;float d=sin(p.x*3.+uTime)*.06+sin(p.y*2.8+uTime*1.1)*.06+sin(p.z*3.2+uTime*.9)*.06;p+=normal*d;gl_Position=projectionMatrix*modelViewMatrix*vec4(p,1.);}`,
+    fragmentShader:`uniform float uTime;uniform vec3 uC1,uC2,uC3;varying vec3 vN,vP;void main(){float t=sin(vP.x*2.+uTime*.5)*.5+.5;float t2=sin(vP.y*2.+uTime*.4)*.5+.5;vec3 col=mix(uC1,uC2,t);col=mix(col,uC3,t2*.4);float rim=1.-dot(vN,vec3(0.,0.,1.));col+=rim*rim*.5*uC1;gl_FragColor=vec4(col,.92);}`,
+    transparent:true
+  });
+  const orb=new THREE.Mesh(geo,mat);scene.add(orb);
+  const wire=new THREE.Mesh(new THREE.IcosahedronGeometry(1.01,3),new THREE.MeshBasicMaterial({color:0x00d4ff,wireframe:true,transparent:true,opacity:.07}));scene.add(wire);
+  const r1=new THREE.Mesh(new THREE.TorusGeometry(1.38,.008,2,120),new THREE.MeshBasicMaterial({color:0x00d4ff,transparent:true,opacity:.35}));r1.rotation.x=Math.PI/2.5;scene.add(r1);
+  const r2=new THREE.Mesh(new THREE.TorusGeometry(1.6,.005,2,120),new THREE.MeshBasicMaterial({color:0x7b6ff0,transparent:true,opacity:.2}));r2.rotation.x=Math.PI/3;r2.rotation.z=Math.PI/5;scene.add(r2);
+  const pArr=new Float32Array(320*3);for(let i=0;i<320;i++){const r=1.8+Math.random()*.8,th=Math.random()*Math.PI*2,ph=Math.random()*Math.PI;pArr[i*3]=r*Math.sin(ph)*Math.cos(th);pArr[i*3+1]=r*Math.sin(ph)*Math.sin(th);pArr[i*3+2]=r*Math.cos(ph);}
+  const pg=new THREE.BufferGeometry();pg.setAttribute('position',new THREE.BufferAttribute(pArr,3));
+  scene.add(new THREE.Points(pg,new THREE.PointsMaterial({color:0x00d4ff,size:.022,transparent:true,opacity:.7})));
+  let tx=0,ty=0;
+  document.addEventListener('mousemove',e=>{tx=(e.clientX/window.innerWidth-.5)*1.2;ty=-(e.clientY/window.innerHeight-.5)*1.2;});
+  let t=0;
+  (function animate(){requestAnimationFrame(animate);t+=.008;mat.uniforms.uTime.value=t;orb.rotation.y=t*.18+tx*.4;orb.rotation.x=t*.1+ty*.3;wire.rotation.y=-t*.12;wire.rotation.x=t*.08;r1.rotation.z+=.004;r2.rotation.y+=.003;renderer.render(scene,camera);})();
+  window.addEventListener('resize',resize);
+
+  /* NAV */
+  const nav=document.getElementById('nav');
+  window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>50));
+
+  /* SCROLL REVEAL */
+  const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:.08});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+  /* FAQ */
+  document.querySelectorAll('.faq-q').forEach(q=>{
+    q.addEventListener('click',()=>{
+      const item=q.parentElement;
+      document.querySelectorAll('.faq-item').forEach(i=>{if(i!==item)i.classList.remove('open');});
+      item.classList.toggle('open');
+    });
+  });
+</script>
+</body>
+</html>
