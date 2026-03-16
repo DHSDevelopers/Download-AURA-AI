@@ -443,7 +443,7 @@
     <div class="sec-tag" style="display:inline-block;margin-bottom:16px">Download</div>
     <h2 class="dl-title">Get <em>AURA AI</em> free</h2>
     <p class="dl-sub">Download the APK, install it on your Android device, and start chatting with AI in under 30 seconds.</p>
-    <a href="https://drive.google.com/file/d/1-0m-AYAkrvezhzXQx2Ce6MacxsSQFzOe/view" download="AURA-AI.apk" class="dl-btn">
+    <a href="https://drive.google.com/file/d/1-0m-AYAkrvezhzXQx2Ce6MacxsSQFzOe/view?usp=drivesdk" download="AURA-AI.apk" class="dl-btn">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
       Download AURA — Free
     </a>
@@ -537,7 +537,8 @@
     fragmentShader:`uniform float uTime;uniform vec3 uC1,uC2,uC3;varying vec3 vN,vP;void main(){float t=sin(vP.x*2.+uTime*.5)*.5+.5;float t2=sin(vP.y*2.+uTime*.4)*.5+.5;vec3 col=mix(uC1,uC2,t);col=mix(col,uC3,t2*.4);float rim=1.-dot(vN,vec3(0.,0.,1.));col+=rim*rim*.5*uC1;gl_FragColor=vec4(col,.92);}`,
     transparent:true
   });
-  const orb=new THREE.Mesh(geo,mat);scene.add(orb);
+  const orb=new THREE.Mesh(geo,mat); // scene.add(orb); <— Removing this line stops the solid part from rendering
+
   const wire=new THREE.Mesh(new THREE.IcosahedronGeometry(1.01,3),new THREE.MeshBasicMaterial({color:0x00d4ff,wireframe:true,transparent:true,opacity:.07}));scene.add(wire);
   const r1=new THREE.Mesh(new THREE.TorusGeometry(1.38,.008,2,120),new THREE.MeshBasicMaterial({color:0x00d4ff,transparent:true,opacity:.35}));r1.rotation.x=Math.PI/2.5;scene.add(r1);
   const r2=new THREE.Mesh(new THREE.TorusGeometry(1.6,.005,2,120),new THREE.MeshBasicMaterial({color:0x7b6ff0,transparent:true,opacity:.2}));r2.rotation.x=Math.PI/3;r2.rotation.z=Math.PI/5;scene.add(r2);
